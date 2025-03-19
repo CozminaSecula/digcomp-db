@@ -1,0 +1,366 @@
+## 2. Scheme Description
+
+### 2.1 Definitions & Acronyms
+
+| Term | Definition |
+|------|------------|
+| Entity | A distinct object in the database model that represents a specific concept (e.g., comp_cadru, comp_nivel) |
+| Attribute | A property or characteristic of an entity (e.g., nume, descriere) |
+| Primary Key (PK) | A unique identifier for a record in a table |
+| Foreign Key (FK) | A field that links to a primary key in another table |
+| Relationship | A connection between tables/entities |
+| Constraint | A rule enforced on data columns to maintain accuracy and reliability |
+| Framework | The overarching competency systems (e.g., DigComp 2.2) |
+| DigComp | European Digital Competence Framework for Citizens|
+| Dimension 1 - Competence Area | Major domains (areas) of digital competence (e.g., Information and data literacy) |
+| Dimension 2 - Descriptor | Title and detailed explanation of the specific competence within each area competence (e.g., Browsing, searching, and filtering data information and digital content) |
+| Dimension 3 - Proficiency Level | Degree of mastery in a specific competence, ranging from foundation to highly specialized |
+| Granular Level | Degree of mastery in a specific proficiency level, ranging from 1 to 8 with defined complexity and autonomy requirements and cognitive process dimension |
+| Dimension 4 - Knowledge, skills and attitudes (KSAs) | Examples applicable to each area competence taking into account new and emerging contexts (e.g telework, AI) |
+| Dimension 5 - Use cases | Applicability of the competence to diffrenet contexts |
+| Cognitive process dimenison | Indicated by the use of action verbs following the Bloom's taxonomy |
+| Transversal competence | There are seven transversal competences that are developed through specifc competences |
+| Learning outcomes | Examples provided for each level of competency |
+
+
+### 2.2 Logical Scheme
+
+The database schema is designed to represent the structure of a digital competence framework, including the relationships between different entities such as competence areas, descriptors, proficiency levels, cognitive processes, learning outcomes. The schema also includes examples, interactions, and transversal competences.
+
+
+```{mermaid}
+erDiagram
+    %% Main Framework Hierarchy
+    comp_cadru ||--o{ comp_arie : contains
+    comp_arie ||--o{ comp_descriptor : contains
+    
+    %% Level and Process relationships
+    comp_nivel }o--|| comp_nivel_categorie : "categorized as"
+    comp_nivel }o--|| proces_cognitiv : "associated with"
+    
+    %% Learning outcomes
+    comp_nivel ||--o{ rezultat_invatare_general : "produces"
+    comp_nivel ||--o{ rezultat_invatare_specific : "produces"
+    rezultat_invatare_specific }o--|| scenariu : "applied in"
+    scenariu }o--|| aplicabilitate_context : "belongs to"
+    
+    %% Examples relationship
+    comp_descriptor ||--o{ comp_exemplu : "exemplified by"
+    comp_exemplu }o--|| comp_componenta : "belongs to"
+    comp_exemplu }o--|| interactioneaza_cu : "interacts with"
+    
+    %% Junction tables
+    comp_descriptor ||--o{ comp_nivel_descriptor : "linked via"
+    comp_nivel ||--o{ comp_nivel_descriptor : "linked via"
+    comp_descriptor ||--o{ comp_transversala_descriptor : "linked via"
+    comp_transversala ||--o{ comp_transversala_descriptor : "linked via"
+
+    %% Framework entities
+    comp_cadru {
+        int id PK "Primary Key"
+        string nume "Name"
+        string versiune "Version"
+        string descriere "Description"
+    }
+    
+    comp_arie {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+        int comp_cadru_id FK "References comp_cadru(id)"
+    }
+    
+    comp_descriptor {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+        int comp_arie_id FK "References comp_arie(id)"
+        string scaff_nume "Scaffold Name"
+        string scaff_number "Scaffold Number"
+    }
+    
+    comp_nivel {
+        int id PK "Primary Key"
+        string granular_nivel "Granular Level"
+        string complexitate "Complexity"
+        string autonomie "Autonomy"
+        int comp_nivel_categorie_id FK "References comp_nivel_categorie(id)"
+        int proces_cognitiv_id FK "References proces_cognitiv(id)"
+    }
+    
+    %% Categorization entities
+    comp_nivel_categorie {
+        int id PK "Primary Key"
+        string nume "Name"
+    }
+    
+    proces_cognitiv {
+        int id PK "Primary Key"
+        string nivel "Level"
+        string definitie "Definition"
+        string capabilitate_umana "Human Capability"
+        string utilizeaza_ai "Uses AI"
+        string verbe_asociate "Associated Verbs"
+    }
+    
+    comp_componenta {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+        string exemplu "Example"
+    }
+    
+    %% Example entities
+    comp_exemplu {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+        int comp_componenta_id FK "References comp_componenta(id)"
+        int comp_descriptor_id FK "References comp_descriptor(id)"
+        int interactioneaza_cu_id FK "References interactioneaza_cu(id)"
+    }
+    
+    interactioneaza_cu {
+        int id PK "Primary Key"
+        string nume "Name"
+        string code "Code"
+    }
+    
+    %% Learning outcome entities
+    rezultat_invatare_general {
+        int id PK "Primary Key"
+        string descriere "Description"
+        int comp_nivel_id FK "References comp_nivel(id)"
+    }
+    
+    rezultat_invatare_specific {
+        int id PK "Primary Key"
+        string descriere "Description"
+        int comp_nivel_id FK "References comp_nivel(id)"
+        int scenariu_id FK "References scenariu(id)"
+    }
+    
+    scenariu {
+        int id PK "Primary Key"
+        string nume "Name"
+        int aplicabilitate_context_id FK "References aplicabilitate_context(id)"
+    }
+    
+    aplicabilitate_context {
+        int id PK "Primary Key"
+        string nume "Name"
+    }
+    
+    %% Transversal competence entities
+    comp_transversala {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+    }
+    
+    %% Junction tables
+    comp_nivel_descriptor {
+        int id PK "Primary Key"
+        int comp_nivel_id FK "References comp_nivel(id)"
+        int comp_descriptor_id FK "References comp_descriptor(id)"
+    }
+    
+    comp_transversala_descriptor {
+        int id PK "Primary Key"
+        int comp_transversala_id FK "References comp_transversala(id)"
+        int comp_descriptor_id FK "References comp_descriptor(id)"
+    }
+```
+
+### 2.3 Objects
+
+#### 2.3.1 Table Descriptions
+
+**1. Table: comp_cadru (Framework)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the framework | Integer |
+| nume | Name of the digital competence framework | String |
+| versiune | Version of the framework (e.g., 2.2) | String |
+| descriere | Description of the framework and its purpose | String |
+
+**2. Table: comp_componenta (Component)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the component | Integer |
+| nume | Name of the component | String(100) |
+| descriere | Description of the component | Text |
+| exemplu | Example for the component | Text |
+
+**3. Table: comp_arie (Competence Area)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the competence area | Integer |
+| nume | Name of the competence area (e.g., Information and Data Literacy) | String |
+| descriere | Description of the competence area | String |
+| comp_cadru_id 🔗 | Foreign key referencing the framework | Integer |
+
+**4. Table: comp_descriptor (Competence Descriptor)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the descriptor | Integer |
+| nume | Name of the competence descriptor (e.g., Browsing, searching, and filtering data information and digital content) | String |
+| descriere | Detailed description of the specific competence | String |
+| comp_arie_id 🔗 | Foreign key referencing the competence area | Integer |
+| scaff_nume | Name of the competence in the scaffold card| String |
+| scaff_number | Alfanumeric code that indicates its affiliation with the competence framework and specifies the number of the competence in the framework | String |
+
+**5. Table: comp_nivel_categorie (Proficiency Level Category)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the cognitive domain | Integer |
+| nume | Name of the category (e.g., Foundation, Intermediate, Advanced) | String |
+
+**6. Table: proces_cognitiv (Cognitive Process)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the cognitive process | Integer |
+| nivel | Six cognitive processes in Bloom's taxonomy (e.g., remember, understand, apply) | String |
+| definitie | Definition of each cognitive process |
+| capabilitate_umana | Emphasize distinctive human skills in the learning process |
+| utilizeaza_ai | Emphasize how generative AI (GenAI) tools can supplement learning processes |
+| verbe_asociate | Examples of associated verbs for each cognitive process used in formulating learning outcomes |
+
+**7. Table: comp_nivel (Proficiency Granular Level)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the proficiency level | Integer |
+| granular_nivel | Numeric indicator of the granular level (1-8) | Integer |
+| complexitate | Description of task complexity at this level | String |
+| autonomie | Description of autonomy expected at this level | String |
+| proces_cognitiv_id | Foreign key referencing the cognitive process | Integer |
+| comp_nivel_categorie_id 🔗 | Foreign key referencing the level category | Integer |
+| comp_descriptor_id 🔗 | Foreign key referencing the competence descriptor | Integer |
+
+**8. Table: comp_nivel_descriptor (Bridge table 1)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for each combination nivel_descriptor | Integer |
+| comp_nivel_id | Foreign key referencing the comp_nivel table | Integer |
+| comp_descriptor_id | Foreign key referencing the comp_descriptor table | Integer |
+
+**9. Table: interactioneaza_cu (Interacts With)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the interaction type | Integer |
+| nume | Name of the interaction type (e.g. Artificial Intelligence, Remote Work) | String |
+| code | Code identifier for the interaction associated with examples of KSA| String |
+
+**10. Table: comp_exemplu (Competence Example)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the example | Integer |
+| nume | Short description of the example | String |
+| descriere | Detailed description of the example | String |
+| comp_componenta_id 🔗 | Foreign key referencing the competence component | Integer |
+| comp_descriptor_id 🔗 | Foreign key referencing the competence descriptor | Integer |
+| interactioneaza_cu_id 🔗 | Foreign key referencing the interaction type | Integer |
+
+**11. Table: aplicabilitate_context (Domain/Context Applicability)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the application domain | Integer |
+| nume | Name of the domain/context (e.g., Employment, Education, Healthcare, Finance) | String |
+
+**12. Table: scenariu (Scenario)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the scenario | Integer |
+| nume | Name or title of the scenario | String |
+| aplicabilitate_context_id 🔗 | Foreign key referencing the domain applicability | Integer |
+
+**13. Table: rezultat_invatare_specific (Specific learning outcome)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the scenario description | Integer |
+| descriere | Detailed description of the specific learning outcome associated with a specific scenario and granular level | String |
+| scenariu_id 🔗 | Foreign key referencing the scenario | Integer |
+| comp_nivel_id 🔗 | Foreign key referencing the comp_nivel | Integer |
+
+**14. Table: rezultat_invatare_general (General learning outcome)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the scenario description | Integer |
+| descriere | Detailed description of the general learning outcome associated with a granular level for a specific competence | String |
+| comp_nivel_id 🔗 | Foreign key referencing the scenario | Integer |
+
+**15. Table: comp_transversala (Transversal Competence)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for the transversal competence | Integer |
+| nume | Name of the transversal competence (e.g., critical thinking, analytical thinking)| String |
+| descriere | Description of the transversal competence | String |
+
+**16. Table: comp_transversala_descriptor (Bridge table 2)**
+
+| Field Name | Field Description | Data Type |
+|------------|-------------------|-----------|
+| id 🔑 | Unique identifier for each combination transversal descriptor | Integer |
+| comp_transversala_id | Foreign key referencing the comp_transversala table | Integer |
+| comp_descriptor_id | Foreign key referencing the comp_descriptor table | Integer |
+
+## Relationships
+
+1. **Framework to Competence Areas:** One framework (comp_cadru) contains multiple competence areas (comp_arie)
+2. **Competence Areas to Descriptors:** One competence area (comp_arie) contains multiple descriptors (comp_descriptor)
+3. **Components to Examples:** One component (comp_componenta) can have multiple examples (comp_exemplu)
+4. **Proficiency Levels to Categories:** Proficiency levels (comp_nivel) are categorized by comp_nivel_categorie
+5. **Proficiency Levels to Cognitive Process:** Levels (comp_nivel) are associated with cognitive processes (proces_cognitiv)
+6. **Descriptors to Examples:** One descriptor (comp_descriptor) can have multiple competence examples (comp_exemplu)
+7. **Examples to Competence Components:** Examples (comp_exemplu) belong to components (comp_componenta) like Knowledge, Skills, Attitudes
+8. **Examples to Interacts With:** Interacts With (interactioneaza_cu) are associated with multiple examples (comp_exemplu) 
+9. **Proficiency Granular Levels to Specific learning outcome:** Proficiency granular levels (comp_nivel) can have multiple specific learning outcomes (rezultat_invatare_specific)
+10. **Proficiency Granular Levels to General learning outcome:** Proficiency granular levels (comp_nivel) can have multiple general learning outcomes (rezultat_invatare_general)
+11. **Scenarios to Specific learning outcome:** Scenario (scenariu) can have multiple specific learning outcomes (rezultat_invatare_specific)
+12. **Scenarios to Application Domains:** Scenarios (scenariu) apply to specific domains (aplicabilitate_context)
+13. **Transversal Competence to Bridge table 2:** Transversal Competence (comp_transversala) has many entries in Bridge table 2 (comp_transversala_descriptor)
+14. **Descriptors to Bridge table 2:** Descriptor (comp_descriptor) has many entries in Bridge table 2 (comp_transversala_descriptor)
+15. **Descriptors to Bridge table 1:** Descriptor (comp_descriptor) has many entries in Bridge table 1 (comp_nivel_descriptor)
+16. **Proficiency Granular Levels to Bridge table 1:** Proficiency Granular Levels  (comp_nivel) has many entries in Bridge table 1 (comp_nivel_descriptor)
+
+## Database Schema Explanation
+
+This diagram shows the implemented structure of the competency framework database:
+
+1. **Framework Structure**:
+   - comp_cadru as the top-level container
+   - Contains comp_arie (Competence Areas)
+   - Areas contain comp_descriptor (Descriptors)
+
+2. **Proficiency System**:
+   - comp_nivel links to comp_nivel_categorie and proces_cognitiv
+   - Bridge table comp_nivel_descriptor connects levels to descriptors
+
+3. **Learning Outcomes**:
+   - Each proficiency level produces rezultat_invatare_general (General Learning Outcomes)
+   - And rezultat_invatare_specific (Specific Learning Outcomes)
+   - Specific outcomes are linked to scenariu (Scenarios)
+
+4. **Examples & Interactions**:
+   - comp_exemplu (Examples) are concrete instances of competencies
+   - They belong to comp_componenta (Components - Knowledge, Skills, Attitudes)
+   - And can interact with external entities via interactioneaza_cu
+
+5. **Cross-cutting Relationships**:
+   - comp_transversala (Transversal Competencies) that cut across multiple descriptors
+   - Junction tables like comp_nivel_descriptor and comp_transversala_descriptor manage many-to-many relationships
