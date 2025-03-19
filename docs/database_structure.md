@@ -1,6 +1,6 @@
-## 2. Scheme Description
+## 1. Scheme Description
 
-### 2.1 Definitions & Acronyms
+### 1.1 Definitions & Acronyms
 
 | Term | Definition |
 |------|------------|
@@ -23,12 +23,12 @@
 | Learning outcomes | Examples provided for each level of competency |
 
 
-### 2.2 Logical Scheme
+### 1.2 Logical Scheme
 
 The database schema is designed to represent the structure of a digital competence framework, including the relationships between different entities such as competence areas, descriptors, proficiency levels, cognitive processes, learning outcomes. The schema also includes examples, interactions, and transversal competences.
 
 
-```{mermaid}
+```mermaid
 erDiagram
     %% Main Framework Hierarchy
     comp_cadru ||--o{ comp_arie : contains
@@ -172,9 +172,9 @@ erDiagram
     }
 ```
 
-### 2.3 Objects
+### 1.3 Objects
 
-#### 2.3.1 Table Descriptions
+#### 1.3.1 Table Descriptions
 
 **1. Table: comp_cadru (Framework)**
 
