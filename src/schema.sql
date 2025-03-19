@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS digcomp.rezultat_invatare_general CASCADE;
 DROP TABLE IF EXISTS digcomp.rezultat_invatare_specific CASCADE;
 DROP TABLE IF EXISTS digcomp.scenariu CASCADE;
 DROP TABLE IF EXISTS digcomp.comp_exemplu CASCADE;
+DROP TABLE IF EXISTS digcomp.comp_nivel CASCADE;
 DROP TABLE IF EXISTS digcomp.comp_descriptor CASCADE;
 DROP TABLE IF EXISTS digcomp.comp_arie CASCADE;
 DROP TABLE IF EXISTS digcomp.comp_cadru CASCADE;
