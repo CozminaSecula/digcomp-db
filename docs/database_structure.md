@@ -16,7 +16,7 @@
 | Dimension 2 - Descriptor | Title and detailed explanation of the specific competence within each area competence (e.g., Browsing, searching, and filtering data information and digital content) |
 | Dimension 3 - Proficiency Level | Degree of mastery in a specific competence, ranging from foundation to highly specialized |
 | Granular Level | Degree of mastery in a specific proficiency level, ranging from 1 to 8 with defined complexity and autonomy requirements and cognitive process dimension |
-| Dimension 4 - Knowledge, skills and attitudes (KSAs) | Examples applicable to each area competence taking into account new and emerging contexts (e.g telework, AI) |
+| Dimension 4 - Knowledge, skills and attitudes (KSAs) | Examples applicable to each area competence taking into account new and emerging contexts (e.g., remote work, AI) |
 | Dimension 5 - Use cases | Applicability of the competence to diffrenet contexts |
 | Cognitive process dimenison | Indicated by the use of action verbs following the Bloom's taxonomy |
 | Transversal competence | There are seven transversal competences that are developed through specifc competences |
@@ -172,6 +172,33 @@ erDiagram
     }
 ```
 
+## Database Schema Explanation
+
+This diagram shows the implemented structure of the competency framework database:
+
+1. **Framework Structure**:
+   - comp_cadru as the top-level container
+   - Contains comp_arie (Competence Areas)
+   - Areas contain comp_descriptor (Descriptors)
+
+2. **Proficiency System**:
+   - comp_nivel links to comp_nivel_categorie and proces_cognitiv
+   - Bridge table comp_nivel_descriptor connects levels to descriptors
+
+3. **Learning Outcomes**:
+   - Each proficiency level produces rezultat_invatare_general (General Learning Outcomes)
+   - And rezultat_invatare_specific (Specific Learning Outcomes)
+   - Specific outcomes are linked to scenariu (Scenarios)
+
+4. **Examples & Interactions**:
+   - comp_exemplu (Examples) are concrete instances of competencies
+   - They belong to comp_componenta (Components - Knowledge, Skills, Attitudes)
+   - And can interact with external entities via interactioneaza_cu
+
+5. **Cross-cutting Relationships**:
+   - comp_transversala (Transversal Competencies) that cut across multiple descriptors
+   - Junction tables like comp_nivel_descriptor and comp_transversala_descriptor manage many-to-many relationships
+
 ### 1.3 Objects
 
 #### 1.3.1 Table Descriptions
@@ -181,16 +208,16 @@ erDiagram
 | Field Name | Field Description | Data Type |
 |------------|-------------------|-----------|
 | id 🔑 | Unique identifier for the framework | Integer |
-| nume | Name of the digital competence framework | String |
+| nume | Name of the competence framework | String |
 | versiune | Version of the framework (e.g., 2.2) | String |
 | descriere | Description of the framework and its purpose | String |
 
-**2. Table: comp_componenta (Component)**
+**2. Table: comp_componenta (Components of Competency)**
 
 | Field Name | Field Description | Data Type |
 |------------|-------------------|-----------|
 | id 🔑 | Unique identifier for the component | Integer |
-| nume | Name of the component | String(100) |
+| nume | Name of the component | String |
 | descriere | Description of the component | Text |
 | exemplu | Example for the component | Text |
 
@@ -212,7 +239,7 @@ erDiagram
 | descriere | Detailed description of the specific competence | String |
 | comp_arie_id 🔗 | Foreign key referencing the competence area | Integer |
 | scaff_nume | Name of the competence in the scaffold card| String |
-| scaff_number | Alfanumeric code that indicates its affiliation with the competence framework and specifies the number of the competence in the framework | String |
+| scaff_cod | Alfanumeric code that indicates its affiliation with the competence framework and specifies the number of the competence in the framework | String |
 
 **5. Table: comp_nivel_categorie (Proficiency Level Category)**
 
@@ -227,10 +254,10 @@ erDiagram
 |------------|-------------------|-----------|
 | id 🔑 | Unique identifier for the cognitive process | Integer |
 | nivel | Six cognitive processes in Bloom's taxonomy (e.g., remember, understand, apply) | String |
-| definitie | Definition of each cognitive process |
-| capabilitate_umana | Emphasize distinctive human skills in the learning process |
-| utilizeaza_ai | Emphasize how generative AI (GenAI) tools can supplement learning processes |
-| verbe_asociate | Examples of associated verbs for each cognitive process used in formulating learning outcomes |
+| definitie | Definition of each cognitive process | String |
+| capabilitate_umana | Emphasize distinctive human skills in the learning process | String |
+| utilizeaza_ia | Emphasize how generative AI (GenAI) tools can supplement learning processes | String |
+| verbe_asociate | Examples of associated verbs for each cognitive process used in formulating learning outcomes | String |
 
 **7. Table: comp_nivel (Proficiency Granular Level)**
 
@@ -258,7 +285,7 @@ erDiagram
 |------------|-------------------|-----------|
 | id 🔑 | Unique identifier for the interaction type | Integer |
 | nume | Name of the interaction type (e.g. Artificial Intelligence, Remote Work) | String |
-| code | Code identifier for the interaction associated with examples of KSA| String |
+| cod | Code identifier for the interaction associated with examples of KSA| String |
 
 **10. Table: comp_exemplu (Competence Example)**
 
@@ -323,44 +350,18 @@ erDiagram
 
 1. **Framework to Competence Areas:** One framework (comp_cadru) contains multiple competence areas (comp_arie)
 2. **Competence Areas to Descriptors:** One competence area (comp_arie) contains multiple descriptors (comp_descriptor)
-3. **Components to Examples:** One component (comp_componenta) can have multiple examples (comp_exemplu)
+3. **Components of Competency to Examples:** One component of competency (comp_componenta) can have multiple examples (comp_exemplu)
 4. **Proficiency Levels to Categories:** Proficiency levels (comp_nivel) are categorized by comp_nivel_categorie
 5. **Proficiency Levels to Cognitive Process:** Levels (comp_nivel) are associated with cognitive processes (proces_cognitiv)
 6. **Descriptors to Examples:** One descriptor (comp_descriptor) can have multiple competence examples (comp_exemplu)
-7. **Examples to Competence Components:** Examples (comp_exemplu) belong to components (comp_componenta) like Knowledge, Skills, Attitudes
+7. **Examples to Components of Competency:** Examples (comp_exemplu) belong to components (comp_componenta) like Knowledge, Skills, Attitudes
 8. **Examples to Interacts With:** Interacts With (interactioneaza_cu) are associated with multiple examples (comp_exemplu) 
 9. **Proficiency Granular Levels to Specific learning outcome:** Proficiency granular levels (comp_nivel) can have multiple specific learning outcomes (rezultat_invatare_specific)
 10. **Proficiency Granular Levels to General learning outcome:** Proficiency granular levels (comp_nivel) can have multiple general learning outcomes (rezultat_invatare_general)
 11. **Scenarios to Specific learning outcome:** Scenario (scenariu) can have multiple specific learning outcomes (rezultat_invatare_specific)
-12. **Scenarios to Application Domains:** Scenarios (scenariu) apply to specific domains (aplicabilitate_context)
+12. **Scenarios to Application Domains:** Scenarios (scenariu) are associated with specific domains (aplicabilitate_context)
 13. **Transversal Competence to Bridge table 2:** Transversal Competence (comp_transversala) has many entries in Bridge table 2 (comp_transversala_descriptor)
 14. **Descriptors to Bridge table 2:** Descriptor (comp_descriptor) has many entries in Bridge table 2 (comp_transversala_descriptor)
 15. **Descriptors to Bridge table 1:** Descriptor (comp_descriptor) has many entries in Bridge table 1 (comp_nivel_descriptor)
 16. **Proficiency Granular Levels to Bridge table 1:** Proficiency Granular Levels  (comp_nivel) has many entries in Bridge table 1 (comp_nivel_descriptor)
 
-## Database Schema Explanation
-
-This diagram shows the implemented structure of the competency framework database:
-
-1. **Framework Structure**:
-   - comp_cadru as the top-level container
-   - Contains comp_arie (Competence Areas)
-   - Areas contain comp_descriptor (Descriptors)
-
-2. **Proficiency System**:
-   - comp_nivel links to comp_nivel_categorie and proces_cognitiv
-   - Bridge table comp_nivel_descriptor connects levels to descriptors
-
-3. **Learning Outcomes**:
-   - Each proficiency level produces rezultat_invatare_general (General Learning Outcomes)
-   - And rezultat_invatare_specific (Specific Learning Outcomes)
-   - Specific outcomes are linked to scenariu (Scenarios)
-
-4. **Examples & Interactions**:
-   - comp_exemplu (Examples) are concrete instances of competencies
-   - They belong to comp_componenta (Components - Knowledge, Skills, Attitudes)
-   - And can interact with external entities via interactioneaza_cu
-
-5. **Cross-cutting Relationships**:
-   - comp_transversala (Transversal Competencies) that cut across multiple descriptors
-   - Junction tables like comp_nivel_descriptor and comp_transversala_descriptor manage many-to-many relationships
