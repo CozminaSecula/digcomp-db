@@ -21,7 +21,7 @@ END $$;
 -- **********************************************
 DO $$
 BEGIN
-    -- Inserare 'De bază'
+    -- Insert 'De bază'
     IF NOT EXISTS (SELECT 1
                    FROM digcomp.comp_nivel_categorie
                    WHERE nume = 'De bază') 
@@ -33,7 +33,7 @@ BEGIN
         RAISE NOTICE 'Value De bază already exists.';
     END IF;
 
-    -- Inserare 'Intermediar'
+    -- Insert 'Intermediar'
     IF NOT EXISTS (SELECT 1 
                    FROM digcomp.comp_nivel_categorie 
                    WHERE nume = 'Intermediar') 
@@ -45,7 +45,7 @@ BEGIN
         RAISE NOTICE 'Value Intermediar already exists.';
     END IF;
 
-    -- Inserare 'Avansat'
+    -- Insert 'Avansat'
     IF NOT EXISTS (SELECT 1 
                    FROM digcomp.comp_nivel_categorie 
                    WHERE nume = 'Avansat') 
@@ -57,7 +57,7 @@ BEGIN
         RAISE NOTICE 'Value Avansat already exists.';
     END IF;
 
-    -- Inserare 'Specializare Ridicată'
+    -- Insert 'Specializare Ridicată'
     IF NOT EXISTS (SELECT 1 
                    FROM digcomp.comp_nivel_categorie 
                    WHERE nume = 'Specializare Ridicată') 
@@ -168,7 +168,7 @@ END $$;
 -- **********************************************
 DO $$
 BEGIN
-    -- Inserare 'Angajare'
+    -- Insert 'Angajare'
     IF NOT EXISTS (SELECT 1
                    FROM digcomp.aplicabilitate_context 
                    WHERE nume = 'Angajare') 
@@ -180,7 +180,7 @@ BEGIN
         RAISE NOTICE 'Value Angajare already exists.';
     END IF;
 
-    -- Inserare 'Învățare'
+    -- Insert 'Învățare'
     IF NOT EXISTS (SELECT 1 
                    FROM digcomp.aplicabilitate_context 
                    WHERE nume = 'Învățare') 
@@ -192,7 +192,7 @@ BEGIN
         RAISE NOTICE 'Value Învățare already exists.';
     END IF;
    
-    -- Inserare 'Oricare domeniu'
+    -- Insert 'Oricare domeniu'
     IF NOT EXISTS (SELECT 1 
                    FROM digcomp.aplicabilitate_context 
                    WHERE nume = 'Oricare domeniu') 
