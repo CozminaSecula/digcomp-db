@@ -104,7 +104,7 @@ erDiagram
         string descriere "Description"
         int comp_arie_id FK "References comp_arie(id)"
         string scaff_nume "Scaffold Name"
-        string scaff_number "Scaffold Number"
+        string scaff_cod "Scaffold Code"
     }
     
     comp_nivel {
@@ -151,7 +151,7 @@ erDiagram
     interactioneaza_cu {
         int id PK "Primary Key"
         string nume "Name"
-        string code "Code"
+        string cod "Code"
     }
     
     %% Learning outcome entities
@@ -214,7 +214,7 @@ erDiagram
 3.  **comp_descriptor (Competence Descriptor)**
     -   Represents specific competencies within an area
     -   Links to competence area
-    -   Contains descriptor name, description, scaffold name, and scaffold number
+    -   Contains descriptor name, description, scaffold name, and scaffold code
 4.  **comp_nivel (Proficiency Granular Level)**
     -   Represents granular levels of proficiency
     -   Links to level category and cognitive process

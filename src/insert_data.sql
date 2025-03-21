@@ -221,9 +221,9 @@ BEGIN
                 'Reamintirea informaţiilor în situații în care tehnologia nu este ușor accesibilă',
                 'Obținerea de informații factuale (includ fragmente izolate de informaţii, cum ar fi: definiţii, cunoştinţe despre detalii specifice); listarea răspunsurilor posibile; definirea unui termen; construirea unei cronologii simple sau a unui calendar(timeline)',
                 'să amintească, să aleagă, să aranjeze, să arate, să clasifice, să comande, să definească, să descrie, să discute, să duplicheze, să eticheteze, să exemplifice, să explice, să găsească, să identifice, să ilustreze, să înregistreze, să listeze, să localizeze, să potrivească, să recite, să recunoască, să recupereze, să relateze, să repete, să reproducă, să rezume, să selecteze, să sorteze, să spună');
-        RAISE NOTICE 'Value A reaminti added to proces_cognitiv.';
+        RAISE NOTICE 'Value A reaminti added.';
     ELSE
-        RAISE NOTICE 'Value A reaminti already exists in proces_cognitiv.';
+        RAISE NOTICE 'Value A reaminti already exists.';
     END IF;
 
     -- Insert "A înţelege" if not exists
@@ -237,9 +237,9 @@ BEGIN
                 'Contextualizarea răspunsurilor în cadrul considerațiilor emoționale, morale sau etice; selectarea informațiilor relevante; explicarea semnificației.',
                 'Descrierea exactă conceptelor (sisteme de informaţii, cum ar fi: clasificări, categorii, principii, teorii, modele) în cuvinte diferite; recunoașterea unui exemplu înrudit; traducerea în altă limbă',
                 'să abstractizeze, să categorizeze, să clarifice, să clasifice, să compare, să concluzioneze, să construiască, să contrasteze, să demonstreze, să descrie, să detecteze, să discute, să distingă, să explice, să exemplifice, să exprime, să extrapoleze, să găsească, să generalizeze, să identifice, să ilustreze, să indice, să interpreteze, să localizeze, să parafrazeze, să prezică, să raporteze, să recunoască, să redea, să reorganizeze, să revizuiască, să rezume, să selecteze, să traducă, să tragă concluzii, să înțeleagă');
-        RAISE NOTICE 'Value A înţelege added to proces_cognitiv.';
+        RAISE NOTICE 'Value A înţelege added.';
     ELSE
-        RAISE NOTICE 'Value A înţelege already exists in proces_cognitiv.';
+        RAISE NOTICE 'Value A înţelege already exists.';
     END IF;
 
     -- Insert "A aplica" if not exists
@@ -253,9 +253,9 @@ BEGIN
                 'Să opereze, să pună în aplicare, să conducă, să execute, să experimenteze și să testeze în lumea reală; să aplice creativitatea și imaginația umană la dezvoltarea de idei și soluții',
                 'Să utilizeze un proces (algoritmi, tehnici şi metode, precum şi cunoştinţe despre situaţiile în care se folosesc aceste metode şi procedee), un model sau o metodă pentru a rezolva o cerecetare cantitativă sau calitativă; să ajute utilizatorii să determine unde au greșit în timpul rezolvării unei probleme, să elaboreze o prezentare, un grafic',
                 'să afișeze, să aleagă, să angajeze, să aplice, să calculeze, să dezvolte, să demonstreze, să execute, să experimenteze, să folosească, să ilustreze, să implementeze, să interpreteze, să joace, să modeleze, să opereze, să practice, să programeze, să pună în aplicare, să realizeze, să rezolve, să schimbe, să schițeze, să simuleze, să utilizeze');
-        RAISE NOTICE 'Value A aplica added to proces_cognitiv.';
+        RAISE NOTICE 'Value A aplica added.';
     ELSE
-        RAISE NOTICE 'Value A aplica already exists in proces_cognitiv.';
+        RAISE NOTICE 'Value A aplica already exists.';
     END IF;
 
     -- Insert "A analiza" if not exists
@@ -269,9 +269,9 @@ BEGIN
                 'Să gândească și să raționeze critic în domeniile cognitiv și afectiv; să justifice analiza în profunzime și cu claritate ',
                 'Să compare și să contrasteze date, să deducă tendințe și teme într-un context bine definit; să calculeze; să realizeze diagrame, mind-mapping, să prezică; să interpreteze și să se raporteze la probleme, decizii și alegeri din lumea reală',
                 'să analizeze, să aprecieze, să aranjeze, să atribuie, să calculeze, să caracterizeze, să clasifice, să compare, să contrasteze, să critice, să deconstruiască, să diferențieze, să distingă, să examineze, să experimenteze, să integreze, să organizeze, să schițeze, să selecteze, să structureze, să testeze');
-        RAISE NOTICE 'Value A analiza added to proces_cognitiv.';
+        RAISE NOTICE 'Value A analiza added.';
     ELSE
-        RAISE NOTICE 'Value A analiza already exists in proces_cognitiv.';
+        RAISE NOTICE 'Value A analiza already exists.';
     END IF;
 
     -- Insert "A evalua" if not exists
@@ -285,9 +285,9 @@ BEGIN
                 'Să se angajeze într-o reflecție metacognitivă (se referă la cunoştinţele despre procesele de gândire, despre sine și felul cum pot fi folosite aceste procese în mod eficient în diferite contexte, de ex. startegii de citire a unui text pentru înţelegere); să evalueze în mod holistic consecințele etice ale cursurilor alternative de acțiune; să identifice semnificația sau să se situeze într-un context istoric sau disciplinar complet',
                 'Identificarea argumentelor pro și contra ale diferitelor căi de acțiune; elaborarea și compararea considerând criterii de evaluare',
                 'să aleagă, să aprecieze, să argumenteze, să atașeze, să compare, să coordoneze, să critice, să decidă, să detecteze, să estimeze, să evalueze, să ierarhizeze, să înscrie, să judece, să măsoare, să monitorizeze, să prezică, să recomande, să selecteze, să susțină, să testeze, să verifice');
-        RAISE NOTICE 'Value A evalua added to proces_cognitiv.';
+        RAISE NOTICE 'Value A evalua added.';
     ELSE
-        RAISE NOTICE 'Value A evalua already exists in proces_cognitiv.';
+        RAISE NOTICE 'Value A evalua already exists.';
     END IF;
 
     -- Insert "A crea" if not exists
@@ -301,9 +301,9 @@ BEGIN
                 'Să se angajeze în procese creative și cognitive care valorifică experiențele umane trăite, interacțiunile socio-emoționale, intuiția, reflecția și judecata pentru a formula soluții originale.',
                 'Sprijinirea proceselor de brainstorming; sugerarea unei game de alternative; enumerarea dezavantajelor și avantajelor potențiale; descrierea cazurilor de succes din lumea reală; crearea unui produs tangibil bazat pe contribuții umane',
                 'să adapteze, să adune, să aranjeze, să asambleze, să compună, să conceapă, să construiască, să creeze, să dezvolte, să elaboreze, să extindă, să facă, să formuleze, să formuleze ipoteze, să genereze, să gestioneze, să imagineze, să inventeze, să modifice, să organizeze, să planifice, să pregătească, să proiecteze, să producă, să propună, să rafineze, să scrie, să transforme');
-        RAISE NOTICE 'Value A crea added to proces_cognitiv.';
+        RAISE NOTICE 'Value A crea added.';
     ELSE
-        RAISE NOTICE 'Value A crea already exists in proces_cognitiv.';
+        RAISE NOTICE 'Value A crea already exists.';
     END IF;
 END $$;
 
@@ -402,4 +402,518 @@ BEGIN
     ELSE
         RAISE NOTICE 'Value Competențe interculturale already exists in comp_transversala.';
     END IF;
+END $$;
+
+-- **********************************************
+-- 8. Insert data în table comp_arie
+-- **********************************************
+DO $$
+DECLARE
+    v_cadru_id INTEGER;
+    v_count INTEGER;
+BEGIN
+    -- Get the framework id
+    SELECT id INTO v_cadru_id
+    FROM digcomp.comp_cadru 
+    WHERE nume = 'DigComp'
+    AND versiune = '2.2';
+
+    -- Check if framework id exists
+    IF v_cadru_id IS NULL THEN
+        RAISE EXCEPTION 'Framework DigComp 2.2 not found';
+    END IF;
+
+    -- Count existing entries
+    SELECT COUNT(*) INTO v_count
+    FROM digcomp.comp_arie
+    WHERE nume = 'Cunoașterea informațiilor și a datelor'
+    AND comp_cadru_id = v_cadru_id;
+
+    -- Insert only if no matching record exists
+    IF v_count = 0 THEN
+        INSERT INTO digcomp.comp_arie (
+            nume,
+            descriere,
+            comp_cadru_id
+        ) VALUES (
+            'Cunoașterea informațiilor și a datelor',
+            'Navigarea, căutarea și filtrarea datelor, a informațiilor și a conținutului digital. ' ||
+            'Evaluarea datelor, a informațiilor și a conținutului digital. ' ||
+            'Gestionarea datelor, a informațiilor și a conținutului digital.',
+            v_cadru_id
+        );
+        RAISE NOTICE 'Competence area "Cunoașterea informațiilor și a datelor" added successfully.';
+    ELSE
+        RAISE NOTICE 'Competence area "Cunoașterea informațiilor și a datelor" already exists.';
+    END IF;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE NOTICE 'Error inserting competence area: %', SQLERRM;
+END $$;
+
+-- **********************************************
+-- 9. Insert data in table comp_descriptor
+-- **********************************************
+DO $$
+DECLARE
+    v_cadru_id INTEGER;
+    v_arie_id INTEGER;
+BEGIN
+    -- Get the framework id
+    SELECT id INTO v_cadru_id
+    FROM digcomp.comp_cadru 
+    WHERE nume = 'DigComp'
+    AND versiune = '2.2';
+
+    -- Validate framework exists
+    IF v_cadru_id IS NULL THEN
+        RAISE EXCEPTION 'Framework DigComp 2.2 not found - cannot proceed with descriptor insertion';
+    END IF;
+
+    -- Get the competence area id
+    SELECT id INTO v_arie_id
+    FROM digcomp.comp_arie
+    WHERE nume = 'Cunoașterea informațiilor și a datelor'
+    AND comp_cadru_id = v_cadru_id;
+
+    -- Validate competence area exists
+    IF v_arie_id IS NULL THEN
+        RAISE EXCEPTION 'Competence area "Cunoașterea informațiilor și a datelor" not found for framework ID %', v_cadru_id;
+    END IF;
+
+    -- Insert descriptor if it doesn't exist
+    IF NOT EXISTS (
+        SELECT 1
+        FROM digcomp.comp_descriptor
+        WHERE nume = 'Navigarea, căutarea și filtrarea datelor, a informațiilor și a conținutului digital'
+        AND comp_arie_id = v_arie_id
+        AND scaff_cod = 'd.1'
+    ) THEN
+        INSERT INTO digcomp.comp_descriptor (
+            nume,
+            descriere,
+            comp_arie_id,
+            scaff_nume,
+            scaff_cod
+        ) VALUES (
+            'Navigarea, căutarea și filtrarea datelor, a informațiilor și a conținutului digital',
+            'Să articuleze nevoile de informare, să caute date, informații și conținut în mediile digitale, ' ||
+            'să le acceseze și să navigheze între ele. Să creeze și să actualizeze strategii personale de căutare.',
+            v_arie_id,
+            'Căutarea de informații și conținut digital',
+            'd.1'
+        );
+        RAISE NOTICE 'Descriptor added successfully';
+    ELSE
+        RAISE NOTICE 'Descriptor already exists';
+    END IF;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Error inserting descriptor: %', SQLERRM;
+END $$;
+
+-- **********************************************
+-- 10. Insert data in table comp_nivel
+-- **********************************************
+DO $$
+DECLARE
+    v_nivel_id INTEGER;
+    v_proces_cognitiv_id INTEGER;
+    r_nivel RECORD;
+BEGIN
+    -- Define proficiency levels data
+    FOR r_nivel IN (
+        SELECT * FROM (VALUES
+            (1, 'Sarcină simplă', 'Cu îndrumare', 'A reaminti', 'De bază'),
+            (2, 'Sarcină simplă', 'Cu autonomie și îndrumare adecvată', 'A reaminti', 'De bază'),
+            (3, 'Sarcini și probleme bine definite și de rutină', 'Pe cont propriu', 'A înţelege', 'Intermediar'),
+            (4, 'Sarcini și probleme bine definite și non-rutiniere', 'În mod independent și în funcție de propriile nevoi', 'A înţelege', 'Intermediar'),
+            (5, 'Sarcini și probleme diferite', 'Îndrumarea altora', 'A aplica', 'Avansat'),
+            (6, 'Sarcinile cele mai potrivite', 'Capabil să mă adaptez în contexte complexe', 'A evalua', 'Avansat'),
+            (7, 'Rezolvare probleme complexe cu soluții limitate', 'Integrez cunoștințele pentru practica profesională', 'A crea', 'Specializare Ridicată'),
+            (8, 'Rezolvare probleme complexe cu multiple factori', 'Propun idei și procese noi în domeniu', 'A crea', 'Specializare Ridicată')
+        ) AS t(granular_nivel, complexitate, autonomie, proces_cognitiv, categorie)
+    ) LOOP
+        -- Get category id
+        SELECT id INTO v_nivel_id
+        FROM digcomp.comp_nivel_categorie
+        WHERE nume = r_nivel.categorie;
+
+        IF v_nivel_id IS NULL THEN
+            RAISE EXCEPTION 'Category % not found', r_nivel.categorie;
+        END IF;
+
+        -- Get cognitive process id
+        SELECT id INTO v_proces_cognitiv_id
+        FROM digcomp.proces_cognitiv
+        WHERE nivel = r_nivel.proces_cognitiv;
+
+        IF v_proces_cognitiv_id IS NULL THEN
+            RAISE EXCEPTION 'Cognitive process % not found', r_nivel.proces_cognitiv;
+        END IF;
+
+        -- Insert if not exists
+        IF NOT EXISTS (
+            SELECT 1 
+            FROM digcomp.comp_nivel
+            WHERE granular_nivel = r_nivel.granular_nivel
+            AND complexitate = r_nivel.complexitate
+            AND autonomie = r_nivel.autonomie
+            AND proces_cognitiv_id = v_proces_cognitiv_id
+            AND comp_nivel_categorie_id = v_nivel_id
+        ) THEN
+            INSERT INTO digcomp.comp_nivel (
+                granular_nivel,
+                complexitate,
+                autonomie,
+                proces_cognitiv_id,
+                comp_nivel_categorie_id
+            ) VALUES (
+                r_nivel.granular_nivel,
+                r_nivel.complexitate,
+                r_nivel.autonomie,
+                v_proces_cognitiv_id,
+                v_nivel_id
+            );
+            RAISE NOTICE 'Added proficiency level %', r_nivel.granular_nivel;
+        ELSE
+            RAISE NOTICE 'Proficiency level % already exists', r_nivel.granular_nivel;
+        END IF;
+    END LOOP;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Error inserting proficiency levels: %', SQLERRM;
+END $$;
+
+-- **********************************************
+-- 11. Insert data in table comp_exemplu
+-- **********************************************
+DO $$
+DECLARE
+    v_descriptor_id INTEGER;
+    -- Variables for KSA interaction IDs
+    v_ai_id INTEGER;  
+    v_rw_id INTEGER;  
+    v_da_id INTEGER;  
+    -- Variables for components IDs
+    v_cunostinte_id INTEGER;
+    v_abilitati_id INTEGER;
+    v_atitudini_id INTEGER;
+BEGIN
+    -- Get descriptor id
+    SELECT id INTO v_descriptor_id
+    FROM digcomp.comp_descriptor
+    WHERE nume = 'Navigarea, căutarea și filtrarea datelor, a informațiilor și a conținutului digital'
+    AND scaff_cod = 'd.1';
+
+    IF v_descriptor_id IS NULL THEN
+        RAISE EXCEPTION 'Competence descriptor d.1 not found';
+    END IF;
+   
+    -- Get interaction type IDs
+    SELECT 
+        (SELECT id FROM digcomp.interactioneaza_cu WHERE cod = 'AI') AS ai_id,
+        (SELECT id FROM digcomp.interactioneaza_cu WHERE cod = 'RW') AS rw_id,
+        (SELECT id FROM digcomp.interactioneaza_cu WHERE cod = 'DA') AS da_id
+    INTO v_ai_id, v_rw_id, v_da_id;
+
+    IF v_ai_id IS NULL OR v_rw_id IS NULL OR v_da_id IS NULL THEN
+        RAISE EXCEPTION 'One or more interaction types not found';
+    END IF;
+   
+    -- Get component IDs
+    SELECT 
+        (SELECT id FROM digcomp.comp_componenta WHERE nume = 'Cunoștințe') AS cunostinte_id,
+        (SELECT id FROM digcomp.comp_componenta WHERE nume = 'Abilități') AS abilitati_id,
+        (SELECT id FROM digcomp.comp_componenta WHERE nume = 'Atitudini') AS atitudini_id
+    INTO v_cunostinte_id, v_abilitati_id, v_atitudini_id;
+
+    IF v_cunostinte_id IS NULL OR v_abilitati_id IS NULL OR v_atitudini_id IS NULL THEN
+        RAISE EXCEPTION 'One or more components not found';
+    END IF;
+
+    -- Insert examples with better structure and AI detection
+    INSERT INTO digcomp.comp_exemplu (
+        comp_descriptor_id, 
+        nume, 
+        descriere, 
+        interactioneaza_cu_id, 
+        comp_componenta_id
+    )
+    SELECT v_descriptor_id, nume, descriere,
+           CASE 
+               WHEN descriere LIKE '%AI%' OR descriere LIKE '%inteligență artificială%' THEN v_ai_id
+               WHEN descriere LIKE '%RW%' OR descriere LIKE '%la distanță%' THEN v_rw_id
+               WHEN descriere LIKE '%DA%' OR descriere LIKE '%accesibilitate%' THEN v_da_id
+               ELSE NULL
+           END,
+           componenta_id
+    FROM (VALUES
+        ('Conștientizarea costurilor accesului la conținut online',
+         'Știe că o parte din rezultatele căutărilor de conținut online poate să nu fie cu acces liber sau gratuit și că pentru a-l accesa poate fi necesară plata unei taxe sau înscrierea la un serviciu.',
+         v_cunostinte_id),
+         
+        ('Înțelegerea modelelor de monetizare a conținutului online',
+         'Conștientizează că majoritatea conținuturilor online disponibile gratuit sunt adesea plătite prin publicitate sau prin vânzarea datelor utilizatorului.',
+         v_cunostinte_id),
+         
+        -- Add other entries following the same pattern...
+
+        ('Preocuparea pentru accesibilitate digitală',
+         'Preocupat de faptul că multe informații și conținuturi online ar putea să nu fie accesibile persoanelor cu dizabilități. DA',
+         v_atitudini_id)
+        
+    ) AS t(nume, descriere, componenta_id)
+    ON CONFLICT (comp_descriptor_id, nume) DO NOTHING;
+
+    RAISE NOTICE 'Examples inserted successfully';
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Error inserting examples: %', SQLERRM;
+END $$;
+
+-- **********************************************
+-- 12. Insert data in table scenariu
+-- **********************************************
+DO $$
+DECLARE
+    v_context_id INTEGER;
+BEGIN
+    -- Get context id
+    SELECT id INTO v_context_id
+    FROM digcomp.aplicabilitate_context
+    WHERE nume = 'Angajare';
+
+    IF v_context_id IS NULL THEN
+        RAISE EXCEPTION 'Context "Angajare" not found';
+    END IF;
+
+    -- Insert if not exists using explicit check
+    IF NOT EXISTS (
+        SELECT 1 FROM digcomp.scenariu
+        WHERE nume = 'Căutarea unui loc de muncă'
+        AND aplicabilitate_context_id = v_context_id
+    ) THEN
+        INSERT INTO digcomp.scenariu (
+            nume,
+            aplicabilitate_context_id
+        ) VALUES (
+            'Căutarea unui loc de muncă',
+            v_context_id
+        );
+        RAISE NOTICE 'Scenario added successfully';
+    ELSE
+        RAISE NOTICE 'Scenario already exists';
+    END IF;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Error inserting scenario: %', SQLERRM;
+END $$;
+
+-- **********************************************
+-- 13. Insert data in table comp_nivel_descriptor
+-- **********************************************
+DO $$
+DECLARE
+    v_nivel_id INTEGER;
+    v_descriptor_id INTEGER;
+BEGIN
+    -- Get descriptor id
+    SELECT id INTO v_descriptor_id
+    FROM digcomp.comp_descriptor
+    WHERE scaff_cod = 'd.1';
+
+    IF v_descriptor_id IS NULL THEN
+        RAISE EXCEPTION 'Descriptor with code d.1 not found';
+    END IF;
+
+    -- Get competence level id for granular level 1
+    SELECT id INTO v_nivel_id
+    FROM digcomp.comp_nivel
+    WHERE granular_nivel = 1;
+
+    IF v_nivel_id IS NULL THEN
+        RAISE EXCEPTION 'Competence level 1 not found';
+    END IF;
+
+    -- Insert the relationship if it doesn't exist
+    IF NOT EXISTS (
+        SELECT 1 
+        FROM digcomp.comp_nivel_descriptor
+        WHERE comp_nivel_id = v_nivel_id
+        AND comp_descriptor_id = v_descriptor_id
+    ) THEN
+        INSERT INTO digcomp.comp_nivel_descriptor (
+            comp_nivel_id,
+            comp_descriptor_id
+        ) VALUES (
+            v_nivel_id,
+            v_descriptor_id
+        );
+        RAISE NOTICE 'Competence level-descriptor relationship added successfully';
+    ELSE
+        RAISE NOTICE 'Competence level-descriptor relationship already exists';
+    END IF;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Error inserting competence level-descriptor relationship: %', SQLERRM;
+END $$;
+
+-- **********************************************  
+-- 14. Insert data in table rezultat_invatare_specific 
+-- **********************************************
+DO $$
+DECLARE
+    v_scenariu_id INTEGER;
+    v_nivel_id INTEGER;
+BEGIN
+    -- Get scenario id
+    SELECT id INTO v_scenariu_id 
+    FROM digcomp.scenariu 
+    WHERE nume = 'Căutarea unui loc de muncă';
+
+    IF v_scenariu_id IS NULL THEN
+        RAISE EXCEPTION 'Scenario not found';
+    END IF;
+
+    -- Get competence level id
+    SELECT cn.id INTO v_nivel_id
+    FROM digcomp.comp_nivel cn
+    JOIN digcomp.comp_nivel_descriptor cnd ON cn.id = cnd.comp_nivel_id
+    JOIN digcomp.comp_descriptor cd ON cnd.comp_descriptor_id = cd.id
+    WHERE cn.granular_nivel = 1
+    AND cd.scaff_cod = 'd.1';
+
+    IF v_nivel_id IS NULL THEN
+        RAISE EXCEPTION 'Competence level not found';
+    END IF;
+
+    -- Insert learning outcomes using a VALUES clause
+    INSERT INTO digcomp.rezultat_invatare_specific (
+        descriere, 
+        scenariu_id, 
+        comp_nivel_id
+    )
+    SELECT 
+        descriere,
+        v_scenariu_id,
+        v_nivel_id
+    FROM (VALUES
+        ('Pot identifica, dintr-o listă, acele portaluri de locuri de muncă care mă pot ajuta să caut un loc de muncă.'),
+        ('Pot, de asemenea, să găsesc aceste portaluri de locuri de muncă în magazinul de aplicații al smartphone-ului meu, să le accesez și să navighez între ele.'),
+        ('Dintr-o listă de cuvinte-cheie generice pentru căutarea unui loc de muncă disponibilă pe un blog despre căutarea unui loc de muncă, pot identifica și cuvintele-cheie care îmi sunt utile.')
+    ) AS t(descriere)
+    WHERE NOT EXISTS (
+        SELECT 1 
+        FROM digcomp.rezultat_invatare_specific
+        WHERE descriere = t.descriere
+        AND scenariu_id = v_scenariu_id
+        AND comp_nivel_id = v_nivel_id
+    );
+
+    RAISE NOTICE 'Learning outcomes inserted successfully';
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Error inserting learning outcomes: %', SQLERRM;
+END $$;
+
+-- **********************************************
+-- 15. Insert data in table rezultat_invatare general
+-- **********************************************
+DO $$
+DECLARE
+    v_nivel_id INTEGER;
+BEGIN
+    -- Get competence level id
+    SELECT cn.id INTO v_nivel_id
+    FROM digcomp.comp_nivel cn
+    JOIN digcomp.comp_nivel_descriptor cnd ON cn.id = cnd.comp_nivel_id
+    JOIN digcomp.comp_descriptor cd ON cnd.comp_descriptor_id = cd.id
+    WHERE cn.granular_nivel = 1
+    AND cd.scaff_cod = 'd.1';
+
+    IF v_nivel_id IS NULL THEN
+        RAISE EXCEPTION 'Competence level not found';
+    END IF;
+
+    -- Insert general outcomes using a VALUES clause
+    INSERT INTO digcomp.rezultat_invatare_general (
+        descriere,
+        comp_nivel_id
+    )
+    SELECT 
+        descriere,
+        v_nivel_id
+    FROM (VALUES
+        ('Pot să îmi identific nevoile de informare, să găsesc date, informații și conținuturi printr-o căutare simplă în medii digitale.'),
+        ('Pot să aflu cum să accesez aceste date, informații și conținuturi și să navighez între ele.'),
+        ('Pot să identific strategii simple de căutare personală.')
+    ) AS t(descriere)
+    WHERE NOT EXISTS (
+        SELECT 1 
+        FROM digcomp.rezultat_invatare_general
+        WHERE descriere = t.descriere
+        AND comp_nivel_id = v_nivel_id
+    );
+
+    RAISE NOTICE 'General outcomes inserted successfully';
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Error inserting general outcomes: %', SQLERRM;
+END $$;
+
+-- **********************************************
+-- 16. Insert data in table comp_transversala_descriptor
+-- **********************************************
+DO $$
+DECLARE
+    v_descriptor_id INTEGER;
+    v_transversal_ids INTEGER[];
+BEGIN
+    -- Get descriptor id
+    SELECT id INTO v_descriptor_id
+    FROM digcomp.comp_descriptor
+    WHERE scaff_cod = 'd.1';
+
+    IF v_descriptor_id IS NULL THEN
+        RAISE EXCEPTION 'Descriptor with code d.1 not found';
+    END IF;
+
+    -- Get transversal competence IDs
+    SELECT array_agg(id) INTO v_transversal_ids
+    FROM digcomp.comp_transversala
+    WHERE nume IN ('Gândire critică', 'Gândire analitică');
+
+    IF array_length(v_transversal_ids, 1) < 2 THEN
+        RAISE EXCEPTION 'One or more transversal competencies not found';
+    END IF;
+
+    -- Insert relationships if they don't exist
+    INSERT INTO digcomp.comp_transversala_descriptor (
+        comp_transversala_id,
+        comp_descriptor_id
+    )
+    SELECT 
+        transversal_id,
+        v_descriptor_id
+    FROM unnest(v_transversal_ids) AS transversal_id
+    WHERE NOT EXISTS (
+        SELECT 1 
+        FROM digcomp.comp_transversala_descriptor
+        WHERE comp_transversala_id = transversal_id
+        AND comp_descriptor_id = v_descriptor_id
+    );
+
+    RAISE NOTICE 'Transversal-descriptor relationships added successfully';
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Error inserting transversal-descriptor relationships: %', SQLERRM;
 END $$;
