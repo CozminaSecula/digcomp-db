@@ -10,6 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    services:
+      postgres:
+        image: postgres:15
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        options: >-
+          --health-cmd "pg_isready -U $POSTGRES_USER"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -24,6 +38,17 @@ jobs:
           cache: 'pip'
       - run: pip install jupyter
       - run: pip install -r requirements.txt
+
+      # Optional: Test PostgreSQL Connection
+      - name: Test PostgreSQL Connection
+        run: pg_isready -h localhost -U ${{ secrets.POSTGRES_USER }}
+
+      # Optional: Initialize Database (if needed for your project)
+      - name: Initialize Database
+        env:
+          PGPASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        run: |
+          psql -h localhost -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }} -c "CREATE TABLE IF NOT EXISTS example_table (id SERIAL PRIMARY KEY, name TEXT);"
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
