@@ -2,7 +2,7 @@
 
 This document provides example queries to help you understand how to interact with the DigComp database. Each example includes context, purpose, and detailed explanations.
 
-To see the output of these query examples visit [this page](../index.html)
+To see the output of these query examples visit [this page](https://cozminasecula.github.io/digcomp-db/)
 
 ## Query 1: Finding Learning Outcomes by Proficiency Level
 
