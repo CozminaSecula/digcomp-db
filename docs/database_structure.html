@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>database_structure</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ae44de7e3b26b230a7801128389852ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">DigComp</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#digcomp-database-documentation" id="toc-digcomp-database-documentation" class="nav-link active" data-scroll-target="#digcomp-database-documentation">DigComp Database Documentation</a>
+  <ul class="collapse">
+  <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link" data-scroll-target="#table-of-contents">Table of Contents</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#core-digcomp-2.2-elements" id="toc-core-digcomp-2.2-elements" class="nav-link" data-scroll-target="#core-digcomp-2.2-elements">Core DigComp 2.2 Elements</a></li>
+  <li><a href="#enhanced-features" id="toc-enhanced-features" class="nav-link" data-scroll-target="#enhanced-features">Enhanced Features</a></li>
+  </ul></li>
+  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts">Key Concepts</a></li>
+  <li><a href="#database-schema" id="toc-database-schema" class="nav-link" data-scroll-target="#database-schema">Database Schema</a></li>
+  <li><a href="#tables-description" id="toc-tables-description" class="nav-link" data-scroll-target="#tables-description">Tables Description</a>
+  <ul class="collapse">
+  <li><a href="#core-tables" id="toc-core-tables" class="nav-link" data-scroll-target="#core-tables">Core Tables</a></li>
+  </ul></li>
+  <li><a href="#relationships" id="toc-relationships" class="nav-link" data-scroll-target="#relationships">Relationships</a>
+  <ul class="collapse">
+  <li><a href="#core-relationships" id="toc-core-relationships" class="nav-link" data-scroll-target="#core-relationships">Core Relationships</a></li>
+  </ul></li>
+  <li><a href="#implementation-notes" id="toc-implementation-notes" class="nav-link" data-scroll-target="#implementation-notes">Implementation Notes</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="digcomp-database-documentation" class="level1">
+<h1>DigComp Database Documentation</h1>
+<p>This document describes the database structure implementing the European Digital Competence Framework for Citizens (DigComp 2.2) with additional enhancements.</p>
+<section id="table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#key-concepts">Key Concepts</a></li>
+<li><a href="#database-schema">Database Schema</a></li>
+<li><a href="#tables-description">Tables Description</a></li>
+<li><a href="#relationships">Relationships</a></li>
+</ul>
+</section>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<section id="core-digcomp-2.2-elements" class="level3">
+<h3 class="anchored" data-anchor-id="core-digcomp-2.2-elements">Core DigComp 2.2 Elements</h3>
+<p>The database implements the five dimensions of DigComp 2.2:</p>
+<ul>
+<li><p>Competence areas (Dimension 1)</p></li>
+<li><p>Competence descriptors (Dimension 2)</p></li>
+<li><p>Proficiency levels (Dimension 3)</p></li>
+<li><p>Knowledge, skills and attitudes examples (Dimension 4)</p></li>
+<li><p>Use cases/scenarios (Dimension 5)</p></li>
+</ul>
+</section>
+<section id="enhanced-features" class="level3">
+<h3 class="anchored" data-anchor-id="enhanced-features">Enhanced Features</h3>
+<p>The database extends the original framework with additional elements to support richer competency modeling:</p>
+<ol type="1">
+<li><strong>Cognitive Process Dimension</strong>
+<ul>
+<li>Based on Bloom’s Taxonomy</li>
+<li>Adds cognitive complexity levels</li>
+<li>Includes AI integration aspects</li>
+<li>Maps verbs to competency descriptions</li>
+</ul></li>
+<li><strong>Transversal Competencies</strong>
+<ul>
+<li>Cross-cutting skills like critical thinking and problem solving</li>
+<li>Links to digital competencies</li>
+<li>Enhances competency framework integration</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="key-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="key-concepts">Key Concepts</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DigComp</td>
+<td>European Digital Competence Framework for Citizens</td>
+</tr>
+<tr class="even">
+<td>Competence Area</td>
+<td>Main domain of digital competence (e.g., Information literacy)</td>
+</tr>
+<tr class="odd">
+<td>Descriptor</td>
+<td>Specific competence within an area</td>
+</tr>
+<tr class="even">
+<td>Proficiency Level</td>
+<td>Mastery level (Foundation, Intermediate, Advanced, Highly Specialized)</td>
+</tr>
+<tr class="odd">
+<td>Learning Outcome</td>
+<td>Expected achievement at each proficiency level</td>
+</tr>
+<tr class="even">
+<td>KSA</td>
+<td>Knowledge, Skills, and Attitudes components</td>
+</tr>
+<tr class="odd">
+<td>Transversal Competence</td>
+<td>Cross-cutting skills developed through specific competencies</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="database-schema" class="level2">
+<h2 class="anchored" data-anchor-id="database-schema">Database Schema</h2>
+<p>The database consists of interconnected tables representing the DigComp framework components:</p>
+<pre class="mermaid"><code>erDiagram
+    %% Main Framework Hierarchy
+    comp_cadru ||--o{ comp_arie : contains
+    comp_arie ||--o{ comp_descriptor : contains
+    
+    %% Level and Process relationships
+    comp_nivel }o--|| comp_nivel_categorie : "categorized as"
+    comp_nivel }o--|| proces_cognitiv : "associated with"
+    
+    %% Learning outcomes
+    comp_nivel ||--o{ rezultat_invatare_general : "produces"
+    comp_nivel ||--o{ rezultat_invatare_specific : "produces"
+    rezultat_invatare_specific }o--|| scenariu : "applied in"
+    scenariu }o--|| aplicabilitate_context : "belongs to"
+    
+    %% Examples relationship
+    comp_descriptor ||--o{ comp_exemplu : "exemplified by"
+    comp_exemplu }o--|| comp_componenta : "belongs to"
+    comp_exemplu }o--|| interactioneaza_cu : "interacts with"
+    
+    %% Junction tables
+    comp_descriptor ||--o{ comp_nivel_descriptor : "linked via"
+    comp_nivel ||--o{ comp_nivel_descriptor : "linked via"
+    comp_descriptor ||--o{ comp_transversala_descriptor : "linked via"
+    comp_transversala ||--o{ comp_transversala_descriptor : "linked via"
+
+    %% Framework entities
+    comp_cadru {
+        int id PK "Primary Key"
+        string nume "Name"
+        string versiune "Version"
+        string descriere "Description"
+    }
+    
+    comp_arie {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+        int comp_cadru_id FK "References comp_cadru(id)"
+    }
+    
+    comp_descriptor {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+        int comp_arie_id FK "References comp_arie(id)"
+        string scaff_nume "Scaffold Name"
+        string scaff_cod "Scaffold Code"
+    }
+    
+    comp_nivel {
+        int id PK "Primary Key"
+        string granular_nivel "Granular Level"
+        string complexitate "Complexity"
+        string autonomie "Autonomy"
+        int comp_nivel_categorie_id FK "References comp_nivel_categorie(id)"
+        int proces_cognitiv_id FK "References proces_cognitiv(id)"
+    }
+    
+    %% Categorization entities
+    comp_nivel_categorie {
+        int id PK "Primary Key"
+        string nume "Name"
+    }
+    
+    proces_cognitiv {
+        int id PK "Primary Key"
+        string nivel "Level"
+        string definitie "Definition"
+        string capabilitate_umana "Human Capability"
+        string utilizeaza_ai "Uses AI"
+        string verbe_asociate "Associated Verbs"
+    }
+    
+    comp_componenta {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+        string exemplu "Example"
+    }
+    
+    %% Example entities
+    comp_exemplu {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+        int comp_componenta_id FK "References comp_componenta(id)"
+        int comp_descriptor_id FK "References comp_descriptor(id)"
+        int interactioneaza_cu_id FK "References interactioneaza_cu(id)"
+    }
+    
+    interactioneaza_cu {
+        int id PK "Primary Key"
+        string nume "Name"
+        string cod "Code"
+    }
+    
+    %% Learning outcome entities
+    rezultat_invatare_general {
+        int id PK "Primary Key"
+        string descriere "Description"
+        int comp_nivel_id FK "References comp_nivel(id)"
+    }
+    
+    rezultat_invatare_specific {
+        int id PK "Primary Key"
+        string descriere "Description"
+        int comp_nivel_id FK "References comp_nivel(id)"
+        int scenariu_id FK "References scenariu(id)"
+    }
+    
+    scenariu {
+        int id PK "Primary Key"
+        string nume "Name"
+        int aplicabilitate_context_id FK "References aplicabilitate_context(id)"
+    }
+    
+    aplicabilitate_context {
+        int id PK "Primary Key"
+        string nume "Name"
+    }
+    
+    %% Transversal competence entities
+    comp_transversala {
+        int id PK "Primary Key"
+        string nume "Name"
+        string descriere "Description"
+    }
+    
+    %% Junction tables
+    comp_nivel_descriptor {
+        int id PK "Primary Key"
+        int comp_nivel_id FK "References comp_nivel(id)"
+        int comp_descriptor_id FK "References comp_descriptor(id)"
+    }
+    
+    comp_transversala_descriptor {
+        int id PK "Primary Key"
+        int comp_transversala_id FK "References comp_transversala(id)"
+        int comp_descriptor_id FK "References comp_descriptor(id)"
+    }</code></pre>
+</section>
+<section id="tables-description" class="level2">
+<h2 class="anchored" data-anchor-id="tables-description">Tables Description</h2>
+<section id="core-tables" class="level3">
+<h3 class="anchored" data-anchor-id="core-tables">Core Tables</h3>
+<ol type="1">
+<li><strong>comp_cadru (Framework)</strong>
+<ul>
+<li>Stores framework metadata</li>
+<li>Primary fields: name, version, description</li>
+</ul></li>
+<li><strong>comp_arie (Competence Areas)</strong>
+<ul>
+<li>Represents major domains of digital competence</li>
+<li>Links to framework</li>
+<li>Contains area name and description</li>
+</ul></li>
+<li><strong>comp_descriptor (Competence Descriptor)</strong>
+<ul>
+<li>Represents specific competencies within an area</li>
+<li>Links to competence area</li>
+<li>Contains descriptor name, description, scaffold name, and scaffold code</li>
+</ul></li>
+<li><strong>comp_nivel (Proficiency Granular Level)</strong>
+<ul>
+<li>Represents granular levels of proficiency</li>
+<li>Links to level category and cognitive process</li>
+<li>Contains granular level, complexity, and autonomy</li>
+</ul></li>
+<li><strong>comp_nivel_categorie (Proficiency Level Category)</strong>
+<ul>
+<li>Represents categories of proficiency levels</li>
+<li>Contains category name</li>
+</ul></li>
+<li><strong>proces_cognitiv (Cognitive Process)</strong>
+<ul>
+<li>Represents cognitive processes in Bloom’s taxonomy</li>
+<li>Contains level, definition, human capability, use of AI, and associated verbs</li>
+</ul></li>
+<li><strong>comp_componenta (Components of Competency)</strong>
+<ul>
+<li>Represents components of competency (Knowledge, Skills, Attitudes)</li>
+<li>Contains component name, description, and example</li>
+</ul></li>
+<li><strong>comp_exemplu (Competence Example)</strong>
+<ul>
+<li>Represents examples of competencies</li>
+<li>Links to competence component, descriptor, and interaction type</li>
+<li>Contains example name and description</li>
+</ul></li>
+<li><strong>interactioneaza_cu (Interacts With)</strong>
+<ul>
+<li>Represents interaction types</li>
+<li>Contains interaction name and code</li>
+</ul></li>
+<li><strong>rezultat_invatare_general (General Learning Outcome)</strong>
+<ul>
+<li>Represents general learning outcomes</li>
+<li>Links to proficiency level</li>
+<li>Contains description</li>
+</ul></li>
+<li><strong>rezultat_invatare_specific (Specific Learning Outcome)</strong>
+<ul>
+<li>Represents specific learning outcomes</li>
+<li>Links to proficiency level and scenario</li>
+<li>Contains description</li>
+</ul></li>
+<li><strong>scenariu (Scenario)</strong>
+<ul>
+<li>Represents scenarios</li>
+<li>Links to application context</li>
+<li>Contains scenario name</li>
+</ul></li>
+<li><strong>aplicabilitate_context (Domain/Context Applicability)</strong>
+<ul>
+<li>Represents application domains/contexts</li>
+<li>Contains domain/context name</li>
+</ul></li>
+<li><strong>comp_transversala (Transversal Competence)</strong>
+<ul>
+<li>Represents transversal competencies</li>
+<li>Contains competence name and description</li>
+</ul></li>
+<li><strong>comp_nivel_descriptor (Bridge table 1)</strong>
+<ul>
+<li>Represents the relationship between proficiency levels and descriptors</li>
+<li>Links to proficiency level and descriptor</li>
+</ul></li>
+<li><strong>comp_transversala_descriptor (Bridge table 2)</strong>
+<ul>
+<li>Represents the relationship between transversal competencies and descriptors</li>
+<li>Links to transversal competence and descriptor</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="relationships" class="level2">
+<h2 class="anchored" data-anchor-id="relationships">Relationships</h2>
+<section id="core-relationships" class="level3">
+<h3 class="anchored" data-anchor-id="core-relationships">Core Relationships</h3>
+<ol type="1">
+<li>Framework → Areas
+<ul>
+<li>One framework contains multiple competence areas</li>
+<li>Enforced by foreign key constraints</li>
+</ul></li>
+<li>Areas → Descriptors
+<ul>
+<li>Each area contains multiple competency descriptors</li>
+<li>Maintains hierarchical structure</li>
+</ul></li>
+<li>Components of Competency → Examples
+<ul>
+<li>One component of competency can have multiple examples</li>
+<li>Links to competence component</li>
+</ul></li>
+<li>Proficiency Levels → Categories
+<ul>
+<li>Proficiency levels are categorized by level category</li>
+<li>Links to level category</li>
+</ul></li>
+<li>Proficiency Levels → Cognitive Process
+<ul>
+<li>Levels are associated with cognitive processes</li>
+<li>Links to cognitive process</li>
+</ul></li>
+<li>Descriptors → Examples
+<ul>
+<li>One descriptor can have multiple competence examples</li>
+<li>Links to competence descriptor</li>
+</ul></li>
+<li>Examples → Components of Competency
+<ul>
+<li>Examples belong to components like Knowledge, Skills, Attitudes</li>
+<li>Links to competence component</li>
+</ul></li>
+<li>Examples → Interacts With
+<ul>
+<li>Interacts With are associated with multiple examples</li>
+<li>Links to interaction type</li>
+</ul></li>
+<li>Proficiency Granular Levels → Specific Learning Outcome
+<ul>
+<li>Proficiency granular levels can have multiple specific learning outcomes</li>
+<li>Links to proficiency level</li>
+</ul></li>
+<li>Proficiency Granular Levels → General Learning Outcome
+<ul>
+<li>Proficiency granular levels can have multiple general learning outcomes</li>
+<li>Links to proficiency level</li>
+</ul></li>
+<li>Scenarios → Specific Learning Outcome
+<ul>
+<li>Scenario can have multiple specific learning outcomes</li>
+<li>Links to scenario</li>
+</ul></li>
+<li>Scenarios → Application Domains
+<ul>
+<li>Scenarios are associated with specific domains</li>
+<li>Links to application context</li>
+</ul></li>
+<li>Transversal Competence → Bridge table 2
+<ul>
+<li>Transversal Competence has many entries in Bridge table 2</li>
+<li>Links to transversal competence</li>
+</ul></li>
+<li>Descriptors → Bridge table 2
+<ul>
+<li>Descriptor has many entries in Bridge table 2</li>
+<li>Links to competence descriptor</li>
+</ul></li>
+<li>Descriptors → Bridge table 1
+<ul>
+<li>Descriptor has many entries in Bridge table 1</li>
+<li>Links to competence descriptor</li>
+</ul></li>
+<li>Proficiency Granular Levels → Bridge table 1
+<ul>
+<li>Proficiency Granular Levels have many entries in Bridge table 1</li>
+<li>Links to proficiency level</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="implementation-notes" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-notes">Implementation Notes</h2>
+<ul>
+<li>All text fields limited to 15000 characters</li>
+<li>Consistent naming conventions used throughout</li>
+<li>Foreign key constraints ensure data integrity</li>
+<li>Unique constraints prevent duplicate entries</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/CozminaSecula\.github\.io\/digcomp-db\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
