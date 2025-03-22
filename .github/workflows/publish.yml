@@ -1,9 +1,9 @@
+name: Quarto Publish
+
 on:
   workflow_dispatch:
   push:
     branches: main
-
-name: Quarto Publish
 
 jobs:
   build-deploy:
@@ -13,17 +13,19 @@ jobs:
     services:
       postgres:
         image: postgres:15
+        env:
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_USER: ${{ secrets.DB_USER }}
+          POSTGRES_DB: digcomp-db
         ports:
           - 5432:5432
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: digcomp-db
+        # Health check to wait for postgres to start
         options: >-
-          --health-cmd "pg_isready -U postgres"
+          --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -36,21 +38,20 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-      - run: pip install jupyter
-      - run: pip install -r requirements.txt
-
-      # Test PostgreSQL Connection
-      - name: Test PostgreSQL Connection
-        run: pg_isready -h localhost -U postgres
-        env:
-          PGPASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      - name: Install Dependencies
+        run: |
+          pip install jupyter
+          pip install -r requirements.txt
 
       # Initialize Database
       - name: Initialize Database
-        run: |
-          psql -h localhost -U postgres -d my_database -c "CREATE TABLE IF NOT EXISTS example_table (id SERIAL PRIMARY KEY, name TEXT);"
         env:
-          PGPASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+        run: |
+          psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U ${{ secrets.DB_USER }} -d digcomp-db -f src/schema.sql
+          psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U ${{ secrets.DB_USER }} -d digcomp-db -f src/insert_data.sql
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
@@ -58,3 +59,8 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: digcomp-db
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
