@@ -4,11 +4,11 @@ This document describes the database structure implementing the European Digital
 
 ## Table of Contents
 
--   [Overview](#overview)
--   [Key Concepts](#key-concepts)
--   [Database Schema](#database-schema)
--   [Tables Description](#tables-description)
--   [Relationships](#relationships)
+- [Overview](#overview)
+- [Key Concepts](#key-concepts)
+- [Database Schema](#database-schema)
+- [Tables Description](#tables-description)
+- [Relationships](#relationships)
 
 ## Overview {#overview}
 
@@ -319,4 +319,3 @@ erDiagram
 -   Consistent naming conventions used throughout
 -   Foreign key constraints ensure data integrity
 -   Unique constraints prevent duplicate entries
-

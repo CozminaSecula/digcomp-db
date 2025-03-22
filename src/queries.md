@@ -2,6 +2,8 @@
 
 This document provides example queries to help you understand how to interact with the DigComp database. Each example includes context, purpose, and detailed explanations.
 
+To see the output of these query examples visit [this page](../index.html)
+
 ## Query 1: Finding Learning Outcomes by Proficiency Level
 
 ### Context
@@ -39,10 +41,10 @@ JOIN digcomp.rezultat_invatare_specific ris ON ris.comp_nivel_id = ni.id
 ORDER BY tip_rezultat;
 ```
 
-## Query 2: Finding Examples with AI Interaction
+## Query 2: Finding Examples with Digital Accessibility Interaction
 
 ### Context
-To understand how artificial intelligence relates to digital competencies, this query helps you find all examples that involve AI interaction for a specific competency descriptor.
+To understand how digital accessibility relates to digital competencies, this query helps you find all examples that involve digital accessibility interaction for a specific competency descriptor.
 
 ```sql
 SELECT 
@@ -56,7 +58,7 @@ JOIN digcomp.comp_descriptor cd ON ce.comp_descriptor_id = cd.id
 JOIN digcomp.comp_componenta cc ON ce.comp_componenta_id = cc.id
 JOIN digcomp.interactioneaza_cu i ON ce.interactioneaza_cu_id = i.id
 WHERE cd.scaff_cod = 'd.1'
-AND i.cod = 'AI'
+AND i.cod = 'DA'
 ORDER BY cc.nume;
 ```
 
