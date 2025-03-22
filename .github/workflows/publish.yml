@@ -16,11 +16,11 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_DB: digcomp-db
         options: >-
-          --health-cmd "pg_isready -U $POSTGRES_USER"
+          --health-cmd "pg_isready -U postgres"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -39,16 +39,18 @@ jobs:
       - run: pip install jupyter
       - run: pip install -r requirements.txt
 
-      # Optional: Test PostgreSQL Connection
+      # Test PostgreSQL Connection
       - name: Test PostgreSQL Connection
-        run: pg_isready -h localhost -U ${{ secrets.POSTGRES_USER }}
-
-      # Optional: Initialize Database (if needed for your project)
-      - name: Initialize Database
+        run: pg_isready -h localhost -U postgres
         env:
           PGPASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+
+      # Initialize Database
+      - name: Initialize Database
         run: |
-          psql -h localhost -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }} -c "CREATE TABLE IF NOT EXISTS example_table (id SERIAL PRIMARY KEY, name TEXT);"
+          psql -h localhost -U postgres -d my_database -c "CREATE TABLE IF NOT EXISTS example_table (id SERIAL PRIMARY KEY, name TEXT);"
+        env:
+          PGPASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
