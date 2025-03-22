@@ -1,17 +1,17 @@
-# DigComp Database System
+# DigComp Database 
 
 ## 1. Overview
 
 ### 1.1 DigComp Database Implementation
 
-A PostgreSQL database implementation of the European Digital Competence Framework (DigComp 2.2) with enhanced features. This repository includes:
+A PostgreSQL database implementation of the European Digital Competence Framework for Citizens (DigComp 2.2) with enhanced features. This repository includes:
 
-- **Database Schema**: Complete SQL implementation of the DigComp framework
+- **Database Schema**: Complete SQL implementation of the DigComp 2.2 framework
 - **Data Scripts**: SQL scripts for data population and management
 - **Documentation**: Detailed documentation of database structure
-- **Query Examples**: Sample SQL queries for common use cases
+- **Query Examples**: Sample SQL queries for use cases
 - **Utilities**: Database connection and query helpers
-- **Web Interface**: Quarto-based documentation viewer
+- **Web Interface**: Quarto web interface for database interaction
 
 [View Documentation](docs/database_structure.md) | [View Schema](src/schema.sql) | [View Queries](src/queries.md)
 
@@ -37,17 +37,9 @@ The project presentation and documentation are in English, while the database co
 
 ### 1.3 Problem statement
 
-Currently, DigComp primarily exists as documentation, which poses several challenges:
+Currently, DigComp primarily exists as documentation, which poses several challenges such as difficulty in systematically tracking competence development, difficulty in creating customizable learning paths based on specific needs and difficulty in integrating competence areas into real-world use cases.
 
-- Difficulty in systematically tracking competence development
-
-- Difficulty in creating customizable learning paths based on specific needs
-
-- Difficulty in providing tailored examples for specific contexts (e.g., remote work, AI, digital accessibility)
-
-- Difficulty in integrating competence areas into real-world use cases
-
-Without a structured database, organizations may struggle to effectively implement digital competence frameworks. This affects integration into learning management systems (LMS) and HR platforms.
+A structured database can help organizations to effectively implement digital competence frameworks. This project aims to address these challenges by providing a comprehensive database implementation of DigComp 2.2.
 
 ## 2. Business Value & Project Vision
 
@@ -87,20 +79,6 @@ The goal is to develop a comprehensive database system that makes the DigComp 2.
    - Career progression mapping
 
 The system will facilitate assessment, development, and validation of digital competences in alignment with European standards, ensuring clear digital skill advancement pathways.
-
-## 3. Implementation Approach
-
-### 3.1 Database Design
-- Define the schema based on DigComp 2.2 components.
-- Ensure normalization to reduce redundancy.
-
-### 3.2 Data Ingestion
-- Develop scripts for loading data into the database.
-- Implement error handling for data integrity.
-
-### 3.3 User Interface
-- Create a web-based interface for user interaction.
-- Ensure accessibility and usability standards are met.
 
 ## References
 
