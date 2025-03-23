@@ -14,8 +14,8 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_USER: ${{ secrets.DB_USER }}
           POSTGRES_DB: digcomp-db
         ports:
           - 5432:5432
@@ -46,12 +46,12 @@ jobs:
       # Initialize Database
       - name: Initialize Database
         env:
-          PGPASSWORD: postgres
+          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
         run: |
-          psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U postgres -d digcomp-db -f src/schema.sql
-          psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U postgres -d digcomp-db -f src/insert_data.sql
+          psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U ${{ secrets.DB_USER }} -d digcomp-db -f src/schema.sql
+          psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U ${{ secrets.DB_USER }} -d digcomp-db -f src/insert_data.sql
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
@@ -62,5 +62,5 @@ jobs:
           DB_HOST: localhost
           DB_PORT: 5432
           DB_NAME: digcomp-db
-          DB_USER: postgres
-          DB_PASSWORD: postgres
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}

@@ -172,30 +172,3 @@ try:
 except:
     display(outcomes_df)
 ```
-
-## Exemple de Interacțiune cu Accesibilitate Digitală
-
-```{python}
-#| label: ai-examples
-#| output: true
-
-ai_examples_df = query_to_dataframe("""
-SELECT 
-    ce.nume as "Competenta",
-    ce.descriere as "Exemplu Descriere",
-    cc.nume as "Componenta",
-    i.nume as "Tip Interacțiune"
-FROM digcomp.comp_exemplu ce
-JOIN digcomp.comp_descriptor cd ON ce.comp_descriptor_id = cd.id
-JOIN digcomp.comp_componenta cc ON ce.comp_componenta_id = cc.id
-JOIN digcomp.interactioneaza_cu i ON ce.interactioneaza_cu_id = i.id
-WHERE cd.scaff_cod = 'd.1'
-AND i.cod = 'DA'
-ORDER BY cc.nume;
-""")
-try:
-    display(ai_examples_df.style.hide(axis='index'))
-except:
-    display(ai_examples_df)
-```
-

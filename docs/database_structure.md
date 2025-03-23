@@ -10,7 +10,7 @@ This document describes the database structure implementing the European Digital
 - [Tables Description](#tables-description)
 - [Relationships](#relationships)
 
-## Overview {#overview}
+## Overview 
 
 ### Core DigComp 2.2 Elements
 
@@ -40,7 +40,7 @@ The database extends the original framework with additional elements to support 
     -   Links to digital competencies
     -   Enhances competency framework integration
 
-## Key Concepts {#key-concepts}
+## Key Concepts
 
 | Term | Definition |
 |-------------------------|-----------------------------------------------|
@@ -52,7 +52,7 @@ The database extends the original framework with additional elements to support 
 | KSA | Knowledge, Skills, and Attitudes components |
 | Transversal Competence | Cross-cutting skills developed through specific competencies |
 
-## Database Schema {#database-schema}
+## Database Schema
 
 The database consists of interconnected tables representing the DigComp framework components:
 
@@ -200,7 +200,7 @@ erDiagram
     }
 ```
 
-## Tables Description {#tables-description}
+## Tables Description
 
 ### Core Tables
 
@@ -260,7 +260,7 @@ erDiagram
     -   Represents the relationship between transversal competencies and descriptors
     -   Links to transversal competence and descriptor
 
-## Relationships {#relationships}
+## Relationships
 
 ### Core Relationships
 

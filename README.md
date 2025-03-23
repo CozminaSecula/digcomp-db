@@ -11,7 +11,7 @@ A PostgreSQL database implementation of the European Digital Competence Framewor
 - **Documentation**: Detailed documentation of database structure
 - **Query Examples**: Sample SQL queries for use cases
 - **Utilities**: Database connection and query helpers
-- **Web Interface**: Quarto web interface for database interaction
+- **Web Interface**: Quarto web interface for results
 
 [View Documentation](docs/database_structure.md) | [View Schema](src/schema.sql) | [View Queries](src/queries.md)
 
@@ -33,7 +33,7 @@ The framework is structured into various dimensions, including:
 
 -   Use cases and implementation scenarios
 
-The project presentation and documentation are in English, while the database content is in Romanian.
+The project presentation and documentation are in English, while the database content is in Romanian. For demonstration purposes, this project includes data for only one competence area.
 
 ### 1.3 Problem statement
 

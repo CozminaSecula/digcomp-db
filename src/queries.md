@@ -2,7 +2,7 @@
 
 This document provides example queries to help you understand how to interact with the DigComp database. Each example includes context, purpose, and detailed explanations.
 
-To see the output of these query examples visit [this page](https://cozminasecula.github.io/digcomp-db/)
+To see the output of some query examples visit [this page](https://cozminasecula.github.io/digcomp-db/)
 
 ## Query 1: Finding Learning Outcomes by Proficiency Level
 
@@ -112,8 +112,8 @@ ORDER BY cn.granular_nivel;
    - Use Query 1 to align learning outcomes with proficiency levels
    - Map competencies to educational programs
 
-2. **AI Integration Analysis**
-   - Use Query 2 to understand AI touchpoints
+2. **AI, DA, RW Integration Analysis**
+   - Use Query 2 to understand AI, DA, RW touchpoints
    - Plan technology integration in learning
 
 3. **Framework Analysis**
